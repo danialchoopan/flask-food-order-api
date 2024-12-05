@@ -1,0 +1,4 @@
+instance/database.sqlite
+uploads/
+.venv
+.idea
