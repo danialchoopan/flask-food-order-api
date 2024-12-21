@@ -1,5 +1,7 @@
 instance/
-uploads/
+
 .venv
 .idea
 __pycache__
+static/
+static

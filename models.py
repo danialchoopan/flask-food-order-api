@@ -47,9 +47,9 @@ class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     seller_id = db.Column(db.Integer, db.ForeignKey('seller.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    photo = db.Column(db.Text, nullable=True)
     description = db.Column(db.Text, nullable=True)
-    price = db.Column(db.Numeric(10, 2), nullable=False)
-    phone = db.Column(db.String(15), unique=True, nullable=False)
+    price = db.Column(db.Text, nullable=False)
     availability = db.Column(db.Boolean, default=True)
     seller = db.relationship('Seller', backref=db.backref('foods', lazy=True))
 
@@ -73,3 +73,14 @@ class OrderDetail(db.Model):
     price = db.Column(db.Numeric(10, 2), nullable=False)
     order = db.relationship('Order', backref=db.backref('details', lazy=True))
     food = db.relationship('Food', backref=db.backref('order_details', lazy=True))
+
+# مدل نظرات
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey('seller.id'), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    user = db.relationship('User', backref=db.backref('comments', lazy=True))
+    seller = db.relationship('Seller', backref=db.backref('comments', lazy=True))
+
