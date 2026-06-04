@@ -38,9 +38,9 @@ def edit_seller_city():
 @token_required_seller
 def get_restaurant_banner():
     seller = Seller.query.get_or_404(request.seller.id)
-    return jsonify({"success": True, "image": seller.image.replace("\\", "/") if seller.image else ""}), 200
+    return jsonify({"success": True, "img": seller.image.replace("\\", "/") if seller.image else ""}), 200
 
-@seller_api_bp.route("/seller/banner/update", methods=["POST"])
+@seller_api_bp.route("/seller/banner/update", methods=["PUT"])
 @token_required_seller
 def edit_restaurant_banner():
     data = request.json
@@ -86,14 +86,14 @@ def seller_edit_open():
 @token_required_seller
 def seller_open_status():
     seller = Seller.query.get_or_404(request.seller.id)
-    return jsonify({"success": True, "open": seller.open}), 200
+    return jsonify({"success": True, "seller_open": seller.open}), 200
 
 @seller_api_bp.route("/seller/upload_image", methods=["POST"])
 @token_required_seller
 def upload_image():
-    if 'file' not in request.files:
+    if 'image' not in request.files:
         return jsonify({"message": "فایلی ارسال نشده است"}), 400
-    file = request.files['file']
+    file = request.files['image']
     if file.filename == '':
         return jsonify({"message": "فایلی انتخاب نشده است"}), 400
     filename = secure_filename(file.filename)
@@ -136,7 +136,7 @@ def add_food():
     )
     db.session.add(new_food)
     db.session.commit()
-    return jsonify({"message": "غذا با موفقیت اضافه شد"}), 201
+    return jsonify({"message": "غذا با موفقیت اضافه شد", "food_id": new_food.id}), 201
 
 @seller_api_bp.route("/seller/food/<int:id>", methods=["GET"])
 @token_required_seller

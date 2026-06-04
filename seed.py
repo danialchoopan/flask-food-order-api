@@ -31,7 +31,7 @@ def seed_data():
             latitude=35.75,
             longitude=51.40,
             open=True,
-            image="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800"
+            image="static/banner/pizza.jpg"
         )
         s1.set_password("seller123")
 
@@ -44,16 +44,16 @@ def seed_data():
             latitude=35.80,
             longitude=51.45,
             open=True,
-            image="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800"
+            image="static/banner/kebab.jpg"
         )
         s2.set_password("seller123")
         db.session.add_all([s1, s2])
         db.session.flush()
 
         # Add Foods
-        f1 = Food(seller_id=s1.id, name="پیتزا پپرونی", price="250000", description="تند و لذیذ با کالباس درجه یک", availability=True, photo="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400")
-        f2 = Food(seller_id=s1.id, name="سیب زمینی سرخ کرده", price="95000", description="با ادویه مخصوص و سس کچاپ", availability=True, photo="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400")
-        f3 = Food(seller_id=s2.id, name="چلو کباب کوبیده", price="320000", description="دو سیخ کباب لقمه با برنج ایرانی", availability=True, photo="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400")
+        f1 = Food(seller_id=s1.id, name="پیتزا پپرونی", price="250000", description="تند و لذیذ با کالباس درجه یک", availability=True, photo="static/food/pepperoni.jpg")
+        f2 = Food(seller_id=s1.id, name="سیب زمینی سرخ کرده", price="95000", description="با ادویه مخصوص و سس کچاپ", availability=True, photo="static/food/fries.jpg")
+        f3 = Food(seller_id=s2.id, name="چلو کباب کوبیده", price="320000", description="دو سیخ کباب لقمه با برنج ایرانی", availability=True, photo="static/food/chelow.jpg")
         db.session.add_all([f1, f2, f3])
         db.session.flush()
 
